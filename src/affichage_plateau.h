@@ -5,8 +5,6 @@
 
 #define COLOR 32
 
-SDL_Surface* init_window ();
-
 void Affiche_hexagon (SDL_Surface* window, int cx, int cy, int rayon, Uint32 color);
 
 void Affiche_plateau (SDL_Surface* window, SDL_Color color);

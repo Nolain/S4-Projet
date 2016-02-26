@@ -71,32 +71,21 @@ void Triangles (SDL_Surface* window, Sint16* x, Sint16* y, Uint32 color)
 		}
 }
 
-void Quadrille (SDL_Surface* window, int margeh, int margev, int ecart, int rayon, SDL_Color color)
+void Quadrille (SDL_Surface* window, int margeh, int margev, int rayon, SDL_Color color)
 {
 	for (int i = 0; i < NBSIDE; ++i)
 	{
-		int dx = margeh + rayon * cos(PI/6) + i * (2 * rayon * cos(PI/6) + 2 * ecart * cos(PI/3));
+		int dx = margeh + rayon * cos(PI/6) + i * (2 * rayon * cos(PI/6));
 		for (int j = 0; j < NBSIDE; ++j)
 		{
-			int y = margev + rayon + j * (1.5 * rayon + ecart * sin(PI/3));
-			int x = dx + j * (rayon * cos(PI/6) + ecart * cos(PI/3));
-			Affiche_hexagon (window, x, y, rayon, SDL_MapRGB(window->format, color.r, color.g, color.b));
+			int y = margev + rayon + j * (1.5 * rayon);
+			int x = dx + j * rayon * cos(PI/6);
+			Affiche_hexagon (window, x, y, rayon - 5, SDL_MapRGB(window->format, color.r, color.g, color.b));
 		}
 	}
 }
 
 /*Externes*/
-
-SDL_Surface* init_window ()
-{
-	if (SDL_Init (SDL_INIT_VIDEO))
-		fprintf (stderr, "Erreur d'inistialisation SDL : %s\n", SDL_GetError());
-	
-	SDL_Surface* window = SDL_SetVideoMode (WIDTH, HEIGHT, COLOR, SDL_HWSURFACE | SDL_RESIZABLE);
-	SDL_FillRect (window, NULL, SDL_MapRGB(window->format, 0, 0, 0));
-	SDL_Flip (window);
-	return window;
-}
 
 void Affiche_hexagon (SDL_Surface* window, int cx, int cy, int rayon, Uint32 color)
 {
@@ -126,16 +115,15 @@ void Affiche_plateau (SDL_Surface* window, SDL_Color color)
 	int margev = 40;
 	int width = window->w - 2 * margeh;
 	int height = window->h - 2 * margev;
-	int ecart = 10;
-	int r1 = (height - (NBSIDE - 1) * ecart * sin(PI/3)) / (.5 + NBSIDE * 1.5); 
-	int r2 = (width - (3 * NBSIDE - 1) * ecart * .5) / ((3 * NBSIDE - 1) * cos (PI/6));
+	int r1 = (height - (NBSIDE - 1)) / (.5 + NBSIDE * 1.5); 
+	int r2 = width / ((3 * NBSIDE - 1) * cos (PI/6));
 	if (r1 < r2)
 	{
-		Quadrille (window, margeh, margev, ecart, r1, color);
+		Quadrille (window, margeh, margev, r1, color);
 	}
 	else
 	{
-		Quadrille (window, margeh, margev, ecart, r2, color);
+		Quadrille (window, margeh, margev, r2, color);
 	}
 }
 

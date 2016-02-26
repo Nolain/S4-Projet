@@ -15,7 +15,7 @@ void Surbrillance (SDL_Surface* window)
 	
 }
 
-int main ()
+/*int main ()
 {
 	SDL_Surface* window = init_window();
 	SDL_Color color = {255, 0, 0};
@@ -42,4 +42,4 @@ int main ()
 	SDL_FreeSurface (window);
 	SDL_Quit ();
 	return 0;
-}
+}*/
