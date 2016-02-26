@@ -1,6 +1,6 @@
 CC=gcc
-CFLAGS=-Wall -g -std=c99 -c -lm
-LDFLAGS=-std=c99
+CFLAGS=-Wall -g -std=c99 -c -lm `sdl-config --cflags --libs`
+LDFLAGS=-std=c99 -lm `sdl-config --cflags --libs`
 EXEC=hex
 SRC=$(wildcard src/*.c)
 OBJ=$(SRC:.c=.o)
@@ -14,4 +14,4 @@ $(EXEC): $(OBJ)
 	$(CC) -o $@ $^ $(LDFLAGS)
 	
 clean:
-	rm -rf *.o $(EXEC)
+	rm -rf src/*.o $(EXEC)
