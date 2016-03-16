@@ -1,5 +1,5 @@
 #include <affichage_menu_principal.h>
-
+/*Fonction affichage menu */
 void Affichage_menu_pricipal (SDL_Surface* window)
 {
 	Uint32 color_entries = SDL_MapRGB (fenetre->format, rand()%255, rand()%255, rand()%255);
