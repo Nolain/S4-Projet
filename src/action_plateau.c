@@ -15,6 +15,15 @@ void Surbrillance (SDL_Surface* window)
 	
 }
 
+#define ROUGE 1
+#define BLEU 2
+#define VIDE 0
+#define larg_plat 9
+#define long_plat 9
+
+int [larg_plat][long_plat] Plateau;
+
+
 /*int main ()
 {
 	SDL_Surface* window = init_window();
