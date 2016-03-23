@@ -15,73 +15,44 @@ void Surbrillance (SDL_Surface* window)
 	
 }
 
-#define ROUGE 1
-#define BLEU 2
+#define J1 1//Le joueur 1 va de haut en bas et le J2 de gauche à droite
+#define J2 2
 #define VIDE 0
 #define larg_plat 9
 #define long_plat 9
 
 int [long_plat][larg_plat] Plateau;
 
-void jouer_cou ( int couleur_joueur, int[long_plat][larg_plat] Plateau , int x , int y )
+void jouer_coup ( int couleur_joueur, int[long_plat][larg_plat] Plateau , int x , int y )
 {
 	Plateau[x][y]=couleur_joueur;
 }
 
-bool couleur_in_case_adjacente (int couleur_joueur, int[long_plat][larg_plat] Plateau , int x, int y)
+bool TestGagnant(int x,int y)
 {
-	bool a;
-	switch (x):
+	bool a[]={false,false,false};
+	if (y=larg_plat)
 	{
-		case 1: switch (y):
-				{
-					case 1: if ((Plateau[1][2] == couleur_joueur) ||(Plateau[2][1] == couleur_joueur) ||(Plateau[2][2] == couleur_joueur))
-						{
-							a=true;
-						}
-						else
-						{
-							a=false
-						}
-						break;
-					case larg_plat: if ((Plateau[x][y-1] == couleur_joueur) ||(Plateau[y][x+1] == couleur_joueur))
-						{
-							a=true;
-						}
-						else
-						{
-							a=false
-						}
-						break;
-					default :  if ((Plateau[x][y+1] == couleur_joueur) ||(Plateau[x+1][y] == couleur_joueur) ||(Plateau[x+1][y+1] == couleur_joueur))
-						{
-							a=true;
-						}
-						else
-						{
-							a=false
-						}
-				}
-		case : long_plat:
-	}
-}
-
-bool cou_possible (int couleur_joueur,int[larg_plat][long_plat] Plateau , int x, int y)
-{
-	bool possible;
-	if (Plateau[x][y]==0)
-	{
-		if (couleur_in_case_adjacente(couleur_joueur, Plateau, x, y))
-		{
-			possible=true;
-		}
+		return true;
 	}
 	else
 	{
-		possbile=false;
+		if(Plateau[x][y+1]==J1 )
+		{
+			a[0]= touchelebout(x,y+1);
+		}
+		else if (Plateau[x+1][y]==J1)
+		{
+			a[1]= touchelebout(x+1,y);
+		}
+		else if (Plateau[x-1][y]==J1)
+		{
+			a[2]= touchelebout(x-1,y);
+		}
 	}
-	return possible;
+	return (a[0]||a[1]||a[2]);
 }
+
 
 /*int main ()
 {
